@@ -11,6 +11,13 @@ When you're ready to move on to the next function replace skipTest with runTest.
 
 function isBiggerThan10(num) {
   // This function should take a number as an argument, and return an appropriate message based on that number's relationship to the number 10
+  if (num > 10) {
+    return `Number ${num} is more than 10`
+  } else if (num == 10) {
+    return `Number ${num} is equal to 10`
+  } else {
+    return `Number ${num} is less than 10`
+  }
 }
 
 runTest("isBiggerThan10() returns a message indicating if a number is bigger than 10", function () {
@@ -24,9 +31,14 @@ runTest("isBiggerThan10() returns a message indicating if a number is bigger tha
 
 function isFalsy(value) {
   // This function should take any value as an argument, and return true if it is falsy, and false otherwise
+  if (value) {
+    return false
+  } else {
+    return true
+  }
 }
 
-skipTest("isFalsy() returns true if a value is falsy and false if it is truthy", function () {
+runTest("isFalsy() returns true if a value is falsy and false if it is truthy", function () {
   check(isFalsy(false)).isEqualTo(true);
   check(isFalsy("")).isEqualTo(true);
   check(isFalsy(0)).isEqualTo(true);
@@ -40,9 +52,16 @@ function readTrafficLight(lightColour) {
   // This function should take a string representing a traffic light colour as an argument
   // It will be one of "red", "green" or "amber" in either uppercase or lowercase
   // You should return a corresponding message
+  if (lightColour.toUpperCase() === "GREEN") {
+    return "GO!"
+  } else if (lightColour.toUpperCase() === "AMBER") {
+    return "GET READY..."
+  } else {
+    return "STOP!"
+  }
 }
 
-skipTest("readTrafficLight() should print a message according to the different colour passed in", function () {
+runTest("readTrafficLight() should print a message according to the different colour passed in", function () {
   check(readTrafficLight("green")).isEqualTo("GO!");
   check(readTrafficLight("GREEN")).isEqualTo("GO!");
 
@@ -55,9 +74,10 @@ skipTest("readTrafficLight() should print a message according to the different c
 
 function isMultipleOf6(num) {
   // This function should take a number as an argument, and return true if it is a multiple of 6, and false otherwise
+  return num % 6 === 0
 }
 
-skipTest("isMultipleOf6() should check if a number is divisible by 6", function () {
+runTest("isMultipleOf6() should check if a number is divisible by 6", function () {
   check(isMultipleOf6(6)).isEqualTo(true);
   check(isMultipleOf6(10)).isEqualTo(false);
   check(isMultipleOf6(15)).isEqualTo(false);
@@ -69,9 +89,10 @@ skipTest("isMultipleOf6() should check if a number is divisible by 6", function 
 function checkInfinitive(word) {
   // This function should take a string representing a French word as an argument, and return true if it is an infinitive verb, and false otherwise
   // A French infinitive verb is a word that ends with either "re", "ir" or "er"
+  return word.toLowerCase().match(/(ir|re|er)$/) ? true : false
 }
 
-skipTest("checkInfinitive() checks if a french word is an infinitive", function () {
+runTest("checkInfinitive() checks if a french word is an infinitive", function () {
   check(checkInfinitive("manger")).isEqualTo(true);
   check(checkInfinitive("faire")).isEqualTo(true);
   check(checkInfinitive("aller")).isEqualTo(true);
@@ -92,9 +113,10 @@ function checkGame(diceRoll, coinToss) {
   // A coin toss will be "H" or "T" representing heads or tails
   // The game is considered to be won if the dice roll is 3 or higher AND the coin toss is "H"
   // You should return true if the game has been won, and false otherwise
+  return diceRoll >= 3 && coinToss == "H"
 }
 
-skipTest("checkGame() should check if a user was won the game", function () {
+runTest("checkGame() should check if a user was won the game", function () {
   check(checkGame(3, "H")).isEqualTo(true);
   check(checkGame(4, "H")).isEqualTo(true);
   check(checkGame(5, "H")).isEqualTo(true);
@@ -110,9 +132,16 @@ function checkBatteryLevel(batteryLevel) {
   // "Battery level: <number-here>%"
   // If the battery level is 100% then it should return a string stating:
   // "Fully charged :)"
+  if (batteryLevel <= 5) {
+    return `Warning - battery level low: ${batteryLevel}%, please charge your device`
+  } else if (batteryLevel < 100) {
+    return `Battery level: ${batteryLevel}%`
+  } else {
+    return "Fully charged :)"
+  }
 }
 
-skipTest("checkBatteryLevel() should return a message with info about the battery level", function () {
+runTest("checkBatteryLevel() should return a message with info about the battery level", function () {
   check(checkBatteryLevel(100)).isEqualTo("Fully charged :)");
 
   check(checkBatteryLevel(99)).isEqualTo("Battery level: 99%");
@@ -133,9 +162,18 @@ function getOrdinalSuffix(num) {
   // E.g. "nd" is an ordinal suffix as we'd write 2nd and "st" is an ordinal suffix as we'd write 1st etc
   // You should return the corresponding ordinal suffix
   // See here for more details: https://www.grammarly.com/blog/how-to-write-ordinal-numbers-correctly/
+  if (num % 10 == 0 || num % 10 >= 4 || num % 10 == 0 || ( num % 100 >= 11 && num % 100 <= 19 ) ) {
+    return "th"
+  } else if (num % 10 == 1) {
+    return "st"
+  } else if (num % 10 == 2) {
+    return "nd"
+  } else if (num % 10 == 3) {
+    return "rd"
+  }
 }
 
-skipTest("getOrdinalSuffix() should give the correct ordinal suffix for a number", function () {
+runTest("getOrdinalSuffix() should give the correct ordinal suffix for a number", function () {
   check(getOrdinalSuffix(1)).isEqualTo("st");
   check(getOrdinalSuffix(2)).isEqualTo("nd");
   check(getOrdinalSuffix(3)).isEqualTo("rd");
