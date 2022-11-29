@@ -10,4 +10,8 @@
 
 // You don't need to use loops for this one! :)
 
-function makeRectangle() {}
+function makeRectangle(m, n) {
+    const block = "*".repeat(m) + "\n"
+    console.log(block.repeat(n))
+}
+makeRectangle(3,5)
