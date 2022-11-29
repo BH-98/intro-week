@@ -1,1 +1,2 @@
-// console.log("Hello", "there, northcoders!");
+console.log("Hello", "there, northcoders!");
+// print "Hello there, northcoders!"
