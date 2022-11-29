@@ -4,6 +4,9 @@ const tutors = ["Anat", "Paul C", "Paul R", "Jonny", "Mitch", "Vel", "Alex", "An
 const tutorsAndIndex = [];
 
 // your loop here...
+for (let i = 0 ; i < tutors.length ; i++) {
+  tutorsAndIndex.push(`${i} : ${tutors[i]}`)
+}
 
 runTest("can add an index and a tutor's name into an array", function () {
   check(tutorsAndIndex).isEqualTo([
