@@ -20,6 +20,11 @@ Somwhere in the middle of the string, there will be a series of consecutive digi
 You should extract that number from the string and return it
 */
 
+function extractCode(str) {
+  const matches = str.match(/\d+/)
+  return parseInt(matches[0])
+}
+
 runTest("extractCode() can find the total from a single code string", function () {
   check(extractCode("abcd67yuio")).isEqualTo(67);
   check(extractCode("abcd103yuio")).isEqualTo(103);
@@ -34,8 +39,11 @@ This function should take a string repesenting a sort code as an argument
 A valid sort code should adher to the format: 2 digits hyphen 2 digits hyphen 2 digits
 You should return true if the sort code is valid, and false otherwise
 */
+function isValidSortCode(str) {
+  return /^\d{2}\-\d{2}\-\d{2}$/.test(str)
+}
 
-skipTest("isValidSortCode() should check is a sort code string is in the correct format", function () {
+runTest("isValidSortCode() should check is a sort code string is in the correct format", function () {
   check(isValidSortCode("10-34-67")).isEqualTo(true);
   check(isValidSortCode("51-34-58")).isEqualTo(true);
   check(isValidSortCode("85-16-23")).isEqualTo(true);
@@ -54,8 +62,11 @@ This function should take a string representing an email as an argument
 An email is considered to be professional if it does not end with a kiss ("x" or "X")
 You should return true if the email is professional, and false otherwise
 */
+function isProfessionalEmail(str) {
+  return !/[xX]$/.test(str)
+}
 
-skipTest("isProfessionalEmail() checks if an email ends with an x", function () {
+runTest("isProfessionalEmail() checks if an email ends with an x", function () {
   check(isProfessionalEmail("x")).isEqualTo(false);
   check(isProfessionalEmail("Dear Sir/Madam")).isEqualTo(true);
   check(isProfessionalEmail("Dear Alex, How are you?")).isEqualTo(true);
@@ -68,8 +79,12 @@ countVowels()
 
 This function should take a string as an argument, and return a count representing the number of vowels it contains
 */
+function countVowels(str) {
+  const vowels = str.match(/[aeiou]/gi)
+  return vowels ? vowels.length : 0
+}
 
-skipTest("countVowels() counts the vowels in a string", function () {
+runTest("countVowels() counts the vowels in a string", function () {
   check(countVowels("")).isEqualTo(0);
   check(countVowels("bcd")).isEqualTo(0);
   check(countVowels("a")).isEqualTo(1);
@@ -85,8 +100,12 @@ This function should take a string as an argument, and return a sum of all the n
 Consecutive digits should be taken as numbers: i.e. "24" = 24, not 6
 If there are no numbers, you should return 0
 */
+function sumNums(str) {
+ const nums = str.match(/\d+/g)
+ return nums ? nums.reduce((sum, num) => sum + parseInt(num) , 0) : 0
+}
 
-skipTest("sumNums() totals all of the numbers in a string", function () {
+runTest("sumNums() totals all of the numbers in a string", function () {
   check(sumNums("hello")).isEqualTo(0);
   check(sumNums("1")).isEqualTo(1);
   check(sumNums("12")).isEqualTo(12);
@@ -102,8 +121,12 @@ The function must return a boolean depending on if the string is a valid
 collection of letters for the TV show countdown.
 In countdown a valid collection contains at least 4 consonants and 3 vowels and has exactly 9 letters
 */
-
-skipTest("testValidCountdown()", function () {
+function testValidCountdown(str) {
+  const v =  str.match(/[aeiou]/gi)
+  const c = str.match(/[^aeiou]/gi)
+  return str.length === 9 && v !== null && v.length >= 3 && c !== null && c.length >= 4
+}
+runTest("testValidCountdown()", function () {
   check(testValidCountdown("aaabbbccc")).isEqualTo(true);
   check(testValidCountdown("eeeedddff")).isEqualTo(true);
   check(testValidCountdown("aeiouwxyz")).isEqualTo(true);
@@ -121,8 +144,11 @@ This function should take a string representing a github url and return the name
 Github urls are of the form https://github.com/northcoders/intro-week
 where "northcoders" is the name of the account and "intro week is the name of the repo"
 */
+function extractRepoName(str) {
+  return str.match(/([^\/]+)/g)[3]
+}
 
-skipTest("extractRepoName()", function () {
+runTest("extractRepoName()", function () {
   check(extractRepoName("https://github.com/northcoders/intro-week")).isEqualTo("intro-week");
   check(extractRepoName("https://github.com/northcoders/remote-git-workshop")).isEqualTo("remote-git-workshop");
   check(extractRepoName("https://github.com/myAccount/notes")).isEqualTo("notes");
@@ -137,8 +163,11 @@ You will need to check whether or not it contains *exactly* 2 consecutive occurr
 This means that there *must* be exactly 2 "l"s in total and they *must* be consecutive
 You should return true if this is the case, and false otherwise
 */
+function testExact2ConsecutiveLs(str) {
+  return /ll/.test(str) && str.match(/l/g).length == 2
+}
 
-skipTest("testExact2ConsecutiveLs()", function () {
+runTest("testExact2ConsecutiveLs()", function () {
   check(testExact2ConsecutiveLs("ll")).isEqualTo(true);
   check(testExact2ConsecutiveLs("hello")).isEqualTo(true);
   check(testExact2ConsecutiveLs("bells")).isEqualTo(true);
